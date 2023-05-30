@@ -1,72 +1,47 @@
 #ifndef MAIN_H
 #define MAIN_H
-
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int print_int(va_list l, flags_t *f);
+#define UNUSED(x) (void)(x)
+#define BUFF_SIZE 1024
+
+/**
+ * struct fmt - for handle printing
+ * @fmt: format type
+ * @fn: function for the type
+ */
+struct fmt
+{
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
+};
+
+
+/**
+ * typedef struct fmt fmt_t - for printing
+ * @fmt: format type
+ * @fm_t: function for the type
+ */
+typedef struct fmt fmt_t;
+
+/* task 0 printing */
 int _printf(const char *format, ...);
-int _putchar(char c);
-int _puts(char *str);
+int handle_print(const char *fmt, int *i,
+		va_list list, char buffer[], int flags, 
+		int width, int precision, int size);
 
-/* format by type */
-int print_c(va_list type, char array[],
+/* task 0 format type */
+int print_char(va_list types, char buffer[],
 		int flags, int width, int precision, int size);
-int print_s(va_list type, char array[],
+int print_string(va_list types, char buffer[],
 		int flags, int width, int precision, int size);
-int print_percentage(va_list type, char array[],
+int print_percent(va_list types, char buffer[],
 		int flags, int width, int precision, int size);
-int print_i(va_list type, char array[],
-		int flags, int width, int precision, int size);
-int print_b(va_list type, char array[],
-		int flags, int width, int precision, int size);
-int print_un(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_oct(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_hex(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_hexa_upper(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_hexa(va_list type, char map_to[], char array[],
-	int flags, char flag_ch, int width, int precision, int size);
-int print_pointer(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_non_printable(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_r(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_rot13string(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_pointer(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_non_printable(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_r(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int print_rot13string(va_list type, char array[],
-	int flags, int width, int precision, int size);
-int handle_print(const char *fmt, int *ind, va_list list, char array[],
-	int flags, int width, int precision, int size);
-int handle_write_char(char c, char array[],
-	int flags, int width, int precision, int size);
-int write_number(int is_negative, int ind, char array[],
-	int flags, int width, int precision, int size);
-int write_num(int ind, char array[],
-	int flags, int width, int prec,
-	int length, char padd, char extra_c);
-int write_unsgnd(int is_negative, int ind,
-	char array[],
-	int flags, int width, int precision, int size);
-int write_pointer(char array[], int ind, int length,
-	int width, int flags, char padd, char extra_c, int padd_start);
 
-
-/* utility stuff */
-int is_printable(char c);
-int append_hexa_code(char ascii_code, char buffer[], int i);
-int is_digit(char c);
-long int convert_size_number(long int num, int size);
-long int convert_size_unsgnd(unsigned long int num, int size);
+/* task 1 format type */
+int print_int(va_list types, char buffer[],
+		int flags, int width, int precision, int size);
 
 #endif
