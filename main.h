@@ -8,6 +8,8 @@ int print_int(va_list l, flags_t *f);
 int _printf(const char *format, ...);
 int _putchar(char c);
 int _puts(char *str);
+
+/* format by type */
 int print_c(va_list type, char array[],
 		int flags, int width, int precision, int size);
 int print_s(va_list type, char array[],
@@ -59,5 +61,12 @@ int write_unsgnd(int is_negative, int ind,
 int write_pointer(char array[], int ind, int length,
 	int width, int flags, char padd, char extra_c, int padd_start);
 
+
+/* utility stuff */
+int is_printable(char c);
+int append_hexa_code(char ascii_code, char buffer[], int i);
+int is_digit(char c);
+long int convert_size_number(long int num, int size);
+long int convert_size_unsgnd(unsigned long int num, int size);
 
 #endif
