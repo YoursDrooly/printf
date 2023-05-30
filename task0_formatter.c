@@ -74,7 +74,7 @@ int print_string(va_list types, char buffer[],
 }
 
 /**
- * print_percent - Prints % 
+ * print_percent - Prints %
  * @types: type
  * @buffer: Buffer array
  * @flags:  flags

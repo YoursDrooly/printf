@@ -29,7 +29,7 @@ typedef struct fmt fmt_t;
 /* task 0 printing */
 int _printf(const char *format, ...);
 int handle_print(const char *fmt, int *i,
-		va_list list, char buffer[], int flags, 
+		va_list list, char buffer[], int flags,
 		int width, int precision, int size);
 
 /* task 0 format type */
