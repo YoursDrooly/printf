@@ -12,7 +12,7 @@
  */
 
 int print_c(va_list type, char array[],
-		int flags, int width, ont precision, int size)
+		int flags, int width, int precision, int size)
 {
 	char c = va_arg(type, int);
 
