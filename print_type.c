@@ -2,31 +2,22 @@
 
 /**
  * handle_print - Prints an argument based on its type
- * @fmt: Formatted string
- * @list: List of arguments to print
+ * @fmt: Formatted string to print
+ * @list: List arguments to print
  * @ind: ind
- * @array: input array to print
- * @flags: det flags
- * @width: det width
- * @precision: det precision
- * @size: det size
- *
+ * @buffer: Buffer array
  * Return: 1 or 2;
  */
-int handle_print(const char *fmt, int *ind, va_list list, char array[],
-	int flags, int width, int precision, int size)
+int handle_print(const char *fmt, int *ind, va_list list, char buffer[])
 {
 	int i, unknow_len = 0, printed_chars = -1;
 	fmt_t fmt_types[] = {
-		{'c', print_c}, {'s', print_s}, {'%', print_percentage},
-		{'i', print_i}, {'d', print_i}, {'b', print_b},
-		{'u', print_un}, {'o', print_oct}, {'x', print_hex},
-		{'X', print_hexa_upper}, {'p', print_p}, {'S', print_non_printable},
-		{'r', print_r}, {'R', print_rot13string}, {'\0', NULL}
+		{'c', print_char}, {'s', print_string}, {'%', print_percent},
+		{'i', print_int}, {'d', print_int}, {'\0', NULL}
 	};
 	for (i = 0; fmt_types[i].fmt != '\0'; i++)
 		if (fmt[*ind] == fmt_types[i].fmt)
-			return (fmt_types[i].fn(list, array, flags, width, precision, size));
+			return (fmt_types[i].fn(list, buffer,));
 
 	if (fmt_types[i].fmt == '\0')
 	{
