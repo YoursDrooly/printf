@@ -1,29 +1,47 @@
 #ifndef MAIN_H
 #define MAIN_H
-
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int print_int(va_list l, flags_t *f);
+#define UNUSED(x) (void)(x)
+#define BUFF_SIZE 1024
+
 /**
- * typedef struct fmt fmt_t - Struct op
- *
- * @fmt: The format.
- * @fm_t: The function associated.
+ * struct fmt - for handle printing
+ * @fmt: format type
+ * @fn: function for the type
+ */
+struct fmt
+{
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
+};
+
+
+/**
+ * typedef struct fmt fmt_t - for printing
+ * @fmt: format type
+ * @fm_t: function for the type
  */
 typedef struct fmt fmt_t;
 
+/* task 0 printing */
 int _printf(const char *format, ...);
 int handle_print(const char *fmt, int *i,
-va_list list, char buffer[], int flags, int width, int precision, int size);
-int _putchar(char c);
-int _puts(char *str);
+		va_list list, char buffer[], int flags, 
+		int width, int precision, int size);
 
-/*Functions to print char & str*/
+/* task 0 format type */
 int print_char(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+		int flags, int width, int precision, int size);
 int print_string(va_list types, char buffer[],
-	int flags, int widtch, int precision, int size);
-int print_pecent(va_list types, char buffer[],
-	int flags, int widtch, int precision, int size);
+		int flags, int width, int precision, int size);
+int print_percent(va_list types, char buffer[],
+		int flags, int width, int precision, int size);
+
+/* task 1 format type */
+int print_int(va_list types, char buffer[],
+		int flags, int width, int precision, int size);
+
 #endif
